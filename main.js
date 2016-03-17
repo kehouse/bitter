@@ -6,9 +6,11 @@ var AddBitterView = require('./bitterFormView');
 
 $(document).ready(function(){
   var finalBitterCol = new BitterCollection();
-   new AddBitterView();
+  new AddBitterView({collection: finalBitterCol});
+
    finalBitterCol.fetch().then(function(data){
-     var collection = new BitterCollection(data);
-     new BitterCollectionView({collection: collection});
+     console.log("AM I HAPPENING", data)
+     new BitterCollectionView({collection: finalBitterCol});
+
    })
 });

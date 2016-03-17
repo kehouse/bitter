@@ -4,6 +4,7 @@ var $ = require('jquery');
 var bitterModel = require('./bitterModel');
 var myTmpl = require('./templates');
 
+
 module.exports = Backbone.View.extend({
   el: '.content',
   template: myTmpl.addTweet,
@@ -13,17 +14,19 @@ module.exports = Backbone.View.extend({
   createBitter: function(event){
     event.preventDefault();
     var newBitter = {
-      username: this.$el.find('textarea[name="username"]').val(),
-      message: this.$el.find('input[name="message"]').val(),
+      Username: this.$el.find('input[name="Username"]').val(),
+      Message: this.$el.find('input[name="Message"]').val(),
     };
     var newBitterModel = new bitterModel(newBitter);
     this.$el.find('input').val('');
     newBitterModel.save();
-    this.listenTo(this.collection, 'add', this.addAll);
+    console.log("COLLECTION", this.collection);
+    this.collection.add(newBitterModel);
+    // this.listenTo(this.collection, 'change', this.addAll);
+    // this.listenTo(this.collection, 'update', this.addAll);
   },
   initialize: function(){
-    this.model = new bitterModel({});
-    this.$el.append(this.render().el);
+    this.$el.append(this.render());
   },
   render: function(){
     var output = this.template;

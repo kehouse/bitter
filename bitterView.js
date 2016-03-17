@@ -3,25 +3,26 @@ var _ = require('underscore');
 var $ = require('jquery');
 var tmpl = require('./templates');
 
-model.exports = Backbone.View.extend({
+module.exports = Backbone.View.extend({
   tagName: 'article',
   template: _.template(tmpl.tweet),
   initialize: function () {
+    console.log('chhchchangne')
     this.listenTo(this.model, 'change', this.render);
   },
   render: function () {
-
     var markup = this.template(this.model.toJSON());
-    console.log(markup)
+    console.log("post to page", markup)
     this.$el.html(markup);
     return this;
   },
   events:{
     'click .delete': 'removeBitter',
-},
+  },
 
-  removeBitter: function () {
-   this.model.destroy();
- },
+  removeBitter: function (event) {
+    event: preventDefault();
+    this.model.destroy();
+   }
 
 });
