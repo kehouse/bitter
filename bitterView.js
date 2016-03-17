@@ -21,7 +21,7 @@ module.exports = Backbone.View.extend({
   },
 
   removeBitter: function (event) {
-    event: preventDefault();
+    event.preventDefault();
     this.model.destroy();
    }
 
